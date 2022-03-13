@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  app:
+    container_name: readingisgood-app
+    image: readingisgood-app
+    build: ./
+    ports:
+      - "9090:9090"
+    depends_on:
+      - postgresqldb
+    environment:
+      APP_PORT: 9090
+      DB_HOST: postgresqldb
+      DB_PORT: 5432
+      DB_DATABASE: readingisgood
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+  postgresqldb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=readingisgood
+
+
